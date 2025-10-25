@@ -2,6 +2,7 @@ import React from 'react'
 import { JsonRegistry } from '@gts/shared'
 import { AppConfig } from '@/lib/config'
 import { ViewerModel } from './viewerModel'
+import { diagramRegistry } from '@/lib/diagramRegistry'
 
 /**
  * VS Code-specific hook that auto-scans workspace on mount
@@ -106,9 +107,35 @@ export function useJsonObjsVscode() {
       const invalidList: Array<{path: string; validation?: any}> = detail.invalidFiles || []
 
       const reg = registryRef.current
-      objList.forEach(o => { const ent = reg.jsonObjs.get(o.id) as any; if (ent && o.validation) ent.validation = o.validation })
-      schemaList.forEach(s => { const ent = reg.jsonSchemas.get(s.id) as any; if (ent && s.validation) ent.validation = s.validation })
-      invalidList.forEach(f => { const ent = reg.invalidFiles.get(f.path) as any; if (ent && f.validation) ent.validation = f.validation })
+
+      // Track which entities have validation changes to invalidate their cached diagrams
+      const idsToInvalidate: string[] = []
+
+      objList.forEach(o => {
+        const ent = reg.jsonObjs.get(o.id) as any
+        if (ent && o.validation) {
+          ent.validation = o.validation
+          idsToInvalidate.push(o.id)
+        }
+      })
+      schemaList.forEach(s => {
+        const ent = reg.jsonSchemas.get(s.id) as any
+        if (ent && s.validation) {
+          ent.validation = s.validation
+          idsToInvalidate.push(s.id)
+        }
+      })
+      invalidList.forEach(f => {
+        const ent = reg.invalidFiles.get(f.path) as any
+        if (ent && f.validation) {
+          ent.validation = f.validation
+        }
+      })
+
+      // Invalidate cached diagrams for entities with validation changes
+      // This ensures the diagram re-renders with updated validation state
+      idsToInvalidate.forEach(id => diagramRegistry.delete(id))
+
       setVersion(v => v + 1)
     }
 
