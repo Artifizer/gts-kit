@@ -321,10 +321,9 @@ export async function deactivate() {
 let changeTimer: NodeJS.Timeout | null = null
 
 function handleFileChange(doc: vscode.TextDocument, delayMsec: number = 500) {
-  console.log(`[GTS] File changed 1: ${doc.uri.fsPath}`)
+  console.log(`[GTS] File changed: ${doc.uri.fsPath}`)
   if (!isGtsCandidateFile(doc)) return
   if (changeTimer) clearTimeout(changeTimer)
-  console.log(`[GTS] File changed 2: ${doc.uri.fsPath}`)
   changeTimer = setTimeout(() => {
     scanAndPost('**/*.{json,jsonc,gts}', false, doc.uri.fsPath)
   }, delayMsec)
