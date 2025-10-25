@@ -319,8 +319,12 @@ Version 0.2.1:
 - [x] VS Code editor: open file in VS Code when clicked in the file name
 - [x] Web viewer: improve the error reporting
 
-Backlog:
+Version 0.2.2:
+- [x] GTS reference error annotation in all the Viewers (Web and Electron)
 - [x] Configurable JSON / JSON schema validation debug logging
+- [x] Added VS Code debugger
+
+Backlog:
 - [ ] Full JSONC support and examples
 - [ ] To detect compatibility errors between schemas of different minor versions
 - [ ] CLI tool: base node.js cli app
