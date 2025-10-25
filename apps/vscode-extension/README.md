@@ -112,6 +112,9 @@ The extension requires an open workspace to save layouts. Open a folder in VSCod
 - Check for syntax errors in your JSON file
 - Look for error messages in the preview panel
 
+### Diagnostics not showing where expected
+- Enable `gts.validation.debug` and re-run validation to see detailed navigation logs.
+
 ## Requirements
 
 - VSCode version 1.85.0 or higher
@@ -120,7 +123,22 @@ The extension requires an open workspace to save layouts. Open a folder in VSCod
 
 ## Extension Settings
 
-This extension does not currently add any VSCode settings. Configuration is automatic based on your workspace.
+The extension contributes the following settings:
+
+- `gts.validation.debug` (boolean)
+  - Default: `false`
+  - When enabled, prints detailed validation debug logs to the Developer Tools Console/Output.
+  - Useful for troubleshooting diagnostic positioning and schema matching.
+
+How to enable:
+- Open VS Code Settings and search for "GTS Viewer: Validation Debug", or
+- Add to your settings.json:
+
+```json
+{
+  "gts.validation.debug": true
+}
+```
 
 ## Known Limitations
 

@@ -87,6 +87,17 @@
           "group": "2_open"
         }
       ]
+    },
+    "configuration": {
+      "title": "GTS Viewer",
+      "properties": {
+        "gts.validation.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging for GTS validation (prints to the Developer Tools Console/Output).",
+          "scope": "window"
+        }
+      }
     }
   },
   "scripts": {
