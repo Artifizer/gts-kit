@@ -320,6 +320,9 @@ Version 0.2.1:
 - [x] Web viewer: improve the error reporting
 
 Backlog:
+- [x] Configurable JSON / JSON schema validation debug logging
+- [ ] Full JSONC support and examples
+- [ ] To detect compatibility errors between schemas of different minor versions
 - [ ] CLI tool: base node.js cli app
 - [ ] CLI tool: ID Validation - Verify identifier syntax using regex patterns
 - [ ] CLI tool: ID Extraction - Fetch identifiers from JSON objects or JSON Schema documents
